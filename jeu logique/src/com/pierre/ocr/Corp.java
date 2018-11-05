@@ -4,77 +4,93 @@ import java.util.Scanner;
 
 public class Corp {
 
-    static int[] combATrouver = new int[4];
-    int[] totalNum = new int[4];
+    static String combATrouver = "";
+   String totalNum = "";
+   int nbChiffreCode = 4;
 
     public void combinaison() {
 
 
-        for (int i = 0; i < combATrouver.length; i++) {
-            combATrouver[i] = (int) ((Math.random()) * 9);
+        for (int i = 0; i < nbChiffreCode; i++) {
+            combATrouver += (int) ((Math.random()) * 9);
         }
+
+        System.out.println(combATrouver);
         this.jeu();
     }
 
     public void jeu() {
-        System.out.println("Ecrire votre code un chiffre par un chiffre : ");
+        System.out.println("Ecrire votre code à " + nbChiffreCode + " chiffres : ");
         Scanner sc = new Scanner(System.in);
-        int num = 0;
 
-        for (int i = 0; i < 4; i++) {
-            num = sc.nextInt();
-            totalNum[i] = num;
-        }
+        totalNum = sc.next();
+
         testCombinaison();
-        testFin();
     }
 
     public void testCombinaison() {
 
-        if (totalNum[0] == combATrouver[0]) {
-            System.out.println("Le premier chiffre est Correct");
-        } else if (totalNum[0] > combATrouver[0]) {
-            System.out.println("Le premier chiffre est plus petit");
-        } else if (totalNum[0] < combATrouver[0]) {
-            System.out.println("Le premier chiffre est plus grand");
+        String conclusion = "";
+        if (totalNum.intern() == combATrouver.intern()){
+            System.out.println("Bravo, ");
+            Fin();
+            return;
+        }else for (int i = 0; i < nbChiffreCode; i++){
+            if (totalNum.charAt(i) > combATrouver.charAt(i)){
+                switch (i){
+                    case 0 :
+                        conclusion += "Le premier chiffre est plus petit, ";
+                        break;
+                    case 1 :
+                        conclusion += "le deuxieme chiffre est plus petit, ";
+                        break;
+                    case 2 :
+                        conclusion += "le troisieme chiffre est plus petit, ";
+                        break;
+                    case 3 :
+                        conclusion += "le quatrieme chiffre est plus petit.";
+                        break;
+                }
+            } else if (totalNum.charAt(i) < combATrouver.charAt(i)){
+                switch (i){
+                    case 0 :
+                        conclusion += "Le premier chiffre est plus grand, ";
+                        break;
+                    case 1 :
+                        conclusion += "le deuxieme chiffre est plus grand, ";
+                        break;
+                    case 2 :
+                        conclusion += "le troisieme chiffre est plus grand, ";
+                        break;
+                    case 3 :
+                        conclusion += "le quatrieme chiffre est plus grand.";
+                        break;
+                }
+            }else if (totalNum.charAt(i) == combATrouver.charAt(i)){
+                switch (i){
+                    case 0 :
+                        conclusion += "Le premier chiffre est correct, ";
+                        break;
+                    case 1 :
+                        conclusion += "le deuxieme chiffre est correct, ";
+                        break;
+                    case 2 :
+                        conclusion += "le troisieme chiffre est correct, ";
+                        break;
+                    case 3 :
+                        conclusion += "le quatrieme chiffre est correct.";
+                        break;
+                }
+            }
         }
-        if (totalNum[1] == combATrouver[1]) {
-            System.out.println("Le deuxieme chiffre est Correct");
-        } else if (totalNum[1] > combATrouver[1]) {
-            System.out.println("Le deuxieme chiffre est plus petit");
-        } else if (totalNum[1] < combATrouver[1]) {
-            System.out.println("Le deuxieme chiffre est plus grand");
-        }
-        if (totalNum[2] == combATrouver[2]) {
-            System.out.println("Le troisieme chiffre est Correct");
-        } else if (totalNum[2] > combATrouver[2]) {
-            System.out.println("Le troisieme chiffre est plus petit");
-        } else if (totalNum[2] < combATrouver[2]) {
-            System.out.println("Le troisieme chiffre est plus grand");
-        }
-        if (totalNum[3] == combATrouver[3]) {
-            System.out.println("Le quatrieme chiffre est Correct");
-        } else if (totalNum[3] > combATrouver[3]) {
-            System.out.println("Le quatrieme chiffre est plus petit");
-        } else if (totalNum[3] < combATrouver[3]) {
-            System.out.println("Le quatrieme chiffre est plus grand");
-        }
+        System.out.println(conclusion);
+        jeu();
     }
 
-    public void testFin(){
+    public void Fin(){
 
-        int count = 0;
-        for (int i = 0; i < 4; i++) {
-            if (totalNum[i] == combATrouver[i]) {
-                count += 1;
-            }else{
-                this.jeu();
-            }
-
-            if (count == 4){
-                System.out.println("Vous avez gagné, le code secret est : " + combATrouver[0] + combATrouver[1] + combATrouver[2] + combATrouver[3]);
-            }
-        }
+        System.out.println("Vous avez gagné, le code secret est : " + combATrouver);
+        return;
     }
 }
 
