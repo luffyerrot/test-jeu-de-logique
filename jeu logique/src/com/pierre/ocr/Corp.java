@@ -9,12 +9,9 @@ public class Corp {
    int nbChiffreCode = 4;
 
     public void combinaison() {
-
-
         for (int i = 0; i < nbChiffreCode; i++) {
             combATrouver += (int) ((Math.random()) * 9);
         }
-
         System.out.println(combATrouver);
         this.jeu();
     }
@@ -22,9 +19,7 @@ public class Corp {
     public void jeu() {
         System.out.println("Ecrire votre code à " + nbChiffreCode + " chiffres : ");
         Scanner sc = new Scanner(System.in);
-
         totalNum = sc.next();
-
         testCombinaison();
     }
 
@@ -33,7 +28,7 @@ public class Corp {
         String conclusion = "";
         if (totalNum.intern() == combATrouver.intern()){
             System.out.println("Bravo, ");
-            Fin();
+            System.out.println("Vous avez gagné, le code secret est : " + combATrouver);
             return;
         }else for (int i = 0; i < nbChiffreCode; i++){
             if (totalNum.charAt(i) > combATrouver.charAt(i)){
@@ -85,12 +80,6 @@ public class Corp {
         }
         System.out.println(conclusion);
         jeu();
-    }
-
-    public void Fin(){
-
-        System.out.println("Vous avez gagné, le code secret est : " + combATrouver);
-        return;
     }
 }
 
