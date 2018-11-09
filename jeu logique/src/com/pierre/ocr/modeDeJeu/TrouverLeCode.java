@@ -1,18 +1,21 @@
 package com.pierre.ocr.modeDeJeu;
 
-import com.pierre.ocr.Menu;
+import com.pierre.ocr.Gestion.Menu;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static com.pierre.ocr.Gestion.Utils.Correct;
+import static com.pierre.ocr.Gestion.Utils.plusGrand;
+import static com.pierre.ocr.Gestion.Utils.plusPetit;
+
 public class TrouverLeCode {
 
     static Scanner sc = new Scanner(System.in);
-    static String sautLigne = System.getProperty("line.separator");
+    static String sautLigne = "\n";
     static String combATrouver = "";
     static String totalNum = "";
     public static void generationRandom(){
-
         for (int i = 0; i < 4; i++) {
             combATrouver += (int) ((Math.random()) * 9);
         }
@@ -23,69 +26,34 @@ public class TrouverLeCode {
         System.out.println("Ecrire votre code à 4 chiffres : ");
         totalNum = sc.next();
         for (int i = 0; i < 4; i++){
-            if (totalNum.intern() == "stop"){
-                return;
-            }else if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){
-                System.out.println("Selectioner une combinaison comprise entre 0000 et 9999" + sautLigne);
-                jeu();
-            }else {
-                testCombinaison();
-            }
+            if (sortie(i, totalNum)) return;
         }
     }
 
-    public static void testCombinaison() {
+    public static boolean sortie(int i, String totalNum) {
+        if (totalNum.intern() == "stop"){
+            return true;
+        }else if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){
+            System.out.println("Selectioner une combinaison comprise entre 0000 et 9999" + sautLigne);
+            jeu();
+        }else {
+            testCombinaison();
+        }
+        return false;
+    }
 
+    public static void testCombinaison() {
         String conclusion = "";
         if (totalNum.intern() == combATrouver.intern()){
             System.out.println("Bravo, " + sautLigne + "Vous avez gagné, le code secret est : " + combATrouver);
             fin();
         }else for (int i = 0; i < 4; i++){
             if (totalNum.charAt(i) > combATrouver.charAt(i)){
-                switch (i){
-                    case 0 :
-                        conclusion += "Le premier chiffre est plus petit, ";
-                        break;
-                    case 1 :
-                        conclusion += (sautLigne + "le deuxieme chiffre est plus petit, ");
-                        break;
-                    case 2 :
-                        conclusion += (sautLigne + "le troisieme chiffre est plus petit, ");
-                        break;
-                    case 3 :
-                        conclusion += (sautLigne + "le quatrieme chiffre est plus petit.");
-                        break;
-                }
+                conclusion += plusPetit(conclusion, i);
             } else if (totalNum.charAt(i) < combATrouver.charAt(i)){
-                switch (i){
-                    case 0 :
-                        conclusion += "Le premier chiffre est plus grand, ";
-                        break;
-                    case 1 :
-                        conclusion += (sautLigne + "le deuxieme chiffre est plus grand, ");
-                        break;
-                    case 2 :
-                        conclusion += (sautLigne + "le troisieme chiffre est plus grand, ");
-                        break;
-                    case 3 :
-                        conclusion += (sautLigne + "le quatrieme chiffre est plus grand.");
-                        break;
-                }
+                conclusion += plusGrand(conclusion, i);
             }else if (totalNum.charAt(i) == combATrouver.charAt(i)){
-                switch (i){
-                    case 0 :
-                        conclusion += "Le premier chiffre est correct, ";
-                        break;
-                    case 1 :
-                        conclusion += (sautLigne + "le deuxieme chiffre est correct, ");
-                        break;
-                    case 2 :
-                        conclusion += (sautLigne + "le troisieme chiffre est correct, ");
-                        break;
-                    case 3 :
-                        conclusion += (sautLigne + "le quatrieme chiffre est correct.");
-                        break;
-                }
+                conclusion += Correct(conclusion, i);
             }
         }
         System.out.println(conclusion);
@@ -93,7 +61,7 @@ public class TrouverLeCode {
     }
 
     public static void fin(){
-        System.out.println("1 - Recommencer" + sautLigne + "2 - Retour au menu" + sautLigne + "3 - Fermer le jeu");
+        System.out.println("1 - Recommencer \n 2 - Retour au menu" + sautLigne + "3 - Fermer le jeu");
         finChoix();
     }
 
