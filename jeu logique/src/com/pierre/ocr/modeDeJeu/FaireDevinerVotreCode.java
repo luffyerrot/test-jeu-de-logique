@@ -13,13 +13,12 @@ public class FaireDevinerVotreCode {
     static String verif = "";
     static String codePourOrdi = "";
     static int count = 0;
-    static String stocageNbOrdi = "";
-    static String[] blacklist = new String[4];
+    static String[] blacklist = {"","","",""};
 
     public static void saisi(){
         for (int i = 0; i < 4; i++) {
             nbOrdi += (int) ((Math.random()) * 9);
-            blacklist[i] = Character.toString(nbOrdi.charAt(i));
+            blacklist[i] += (nbOrdi.charAt(i));
         }
         System.out.println("Ecrire votre code secret à 4 chiffre pour l'ordinateur");
         codePourOrdi = sc.next();
@@ -35,7 +34,7 @@ public class FaireDevinerVotreCode {
     }
 
     public static void testOrdi(){
-        stocageNbOrdi = "";
+        StringBuffer buffer = new StringBuffer(nbOrdi);
         if(nbOrdi.intern() == codePourOrdi.intern()){
             fin();
         }
@@ -50,24 +49,16 @@ public class FaireDevinerVotreCode {
                 testOrdi();
             }
         }
+
         for (int i = 0; i < 4; i++){
-            memoire(i);
-        }
-        nbOrdi = stocageNbOrdi;
-        testOrdi();
-    }
-
-    public static String memoire(int i) {
-        if (verif.charAt(i) == 48){
-            if (blacklist[i].contains(Character.toString(nbOrdi.charAt(i))) == true){
-                stocageNbOrdi.charAt(i) = (char)((int)(Math.random()) * 9);
-            }else{
-
+            if (verif.charAt(i) == 48){
+                if(blacklist[i].contains(Character.toString(nbOrdi.charAt(i)))){
+                    buffer.setCharAt(i, ((char)((int)Math.random() * 9)));
+                }
             }
-        }else if (verif.charAt(i) == 49){
-            stocageNbOrdi += nbOrdi;
         }
-        return stocageNbOrdi;
+
+        testOrdi();
     }
 
     public static void fin(){
