@@ -30,10 +30,11 @@ public class Duel {
         }
         System.out.println("Ecrire votre code secret à 4 chiffre pour l'ordinateur");
         codePourOrdi = sc.next();
+        if (codePourOrdi.intern() == "stop"){
+            Menu.menu();
+        }
         for (int i = 0; i < 4; i++){
-            if (codePourOrdi.intern() == "stop"){
-                return;
-            }else if ((int)codePourOrdi.charAt(i) < 48 || (int)codePourOrdi.charAt(i) > 57){
+            if ((int)codePourOrdi.charAt(i) < 48 || (int)codePourOrdi.charAt(i) > 57){
                 System.out.println("Selectioner une combinaison comprise entre 0000 et 9999" + sautLigne);
                 saisi();
             }
@@ -60,10 +61,11 @@ public class Duel {
     public static void choixJoueur() {
         System.out.println("Ecrire un code à 4 chiffres : ");
         totalNum = sc.next();
+        if (totalNum.intern() == "stop"){
+            Menu.menu();
+        }
         for (int i = 0; i < 4; i++){
-            if (totalNum.intern() == "stop"){
-                return;
-            }else if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){
+            if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){
                 System.out.println("Selectioner une combinaison comprise entre 0000 et 9999" + sautLigne);
                 choixJoueur();
             }
@@ -92,10 +94,11 @@ public class Duel {
         System.out.println("Votre adversaire propose : " + nbOrdi + sautLigne +
                 "écrire un code a 4 chiffre pour aider l'ordinateur : " + sautLigne + "0 - Mauvais" + sautLigne +"1 - Bon");
         verif = sc.next();
+        if (verif.intern() == "stop"){
+            Menu.menu();
+        }
         for (int i = 0; i < 4; i++){
-            if (verif.intern() == "stop"){
-                return;
-            }else if ((int)verif.charAt(i) < 48 || (int)verif.charAt(i) > 49){
+            if ((int)verif.charAt(i) < 48 || (int)verif.charAt(i) > 49){
                 System.out.println("Selectioner une combinaison comprise entre 0000 et 1111" + sautLigne);
                 testOrdi();
             }

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Menu {
 
     public static void menu() {
-        String sautLigne = System.getProperty("line.separator");
+        String sautLigne = "\n";
         System.out.println("Jeu de logique : " + sautLigne + sautLigne + "1 - Trouver le code de l'ordinateur" + sautLigne +
                 "2 - Jouer en duel contre l'ordinateur" + sautLigne + "3 - L'ordinateur cherche votre code secret" + sautLigne + "4 - Fermer le jeu");
         menuChoix();

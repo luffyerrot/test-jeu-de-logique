@@ -32,6 +32,7 @@ public class TrouverLeCode {
 
     public static boolean sortie(int i, String totalNum) {
         if (totalNum.intern() == "stop"){
+            Menu.menu();
             return true;
         }else if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){
             System.out.println("Selectioner une combinaison comprise entre 0000 et 9999" + sautLigne);
@@ -49,11 +50,11 @@ public class TrouverLeCode {
             fin();
         }else for (int i = 0; i < 4; i++){
             if (totalNum.charAt(i) > combATrouver.charAt(i)){
-                conclusion += plusPetit(conclusion, i);
+                conclusion = plusPetit(conclusion, i);
             } else if (totalNum.charAt(i) < combATrouver.charAt(i)){
-                conclusion += plusGrand(conclusion, i);
+                conclusion = plusGrand(conclusion, i);
             }else if (totalNum.charAt(i) == combATrouver.charAt(i)){
-                conclusion += Correct(conclusion, i);
+                conclusion = Correct(conclusion, i);
             }
         }
         System.out.println(conclusion);
@@ -61,7 +62,7 @@ public class TrouverLeCode {
     }
 
     public static void fin(){
-        System.out.println("1 - Recommencer \n 2 - Retour au menu" + sautLigne + "3 - Fermer le jeu");
+        System.out.println("1 - Recommencer" + sautLigne + "2 - Retour au menu" + sautLigne + "3 - Fermer le jeu");
         finChoix();
     }
 
