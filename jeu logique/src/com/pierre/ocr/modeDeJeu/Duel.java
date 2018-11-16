@@ -19,6 +19,9 @@ public class Duel {
     static String codePourOrdi ="";
     static String stocageNbOrdi;
 
+    /**
+     * Saisi du code que l'ordinateur doit trouver
+     **/
     public static void saisi(){
         stocageNbOrdi = "";
         for (int i = 0; i < 4; i++) {
@@ -34,7 +37,7 @@ public class Duel {
             Menu.menu();
         }
         for (int i = 0; i < 4; i++){
-            if ((int)codePourOrdi.charAt(i) < 48 || (int)codePourOrdi.charAt(i) > 57){
+            if ((int)codePourOrdi.charAt(i) < 48 || (int)codePourOrdi.charAt(i) > 57){ //48 et 57 corresponds à 0 et 9 dans le tableau ASCII.
                 System.out.println("Selectioner une combinaison comprise entre 0000 et 9999" + sautLigne);
                 saisi();
             }
@@ -42,6 +45,9 @@ public class Duel {
         randomPourCommencer();
     }
 
+    /**
+     * Détermine aléatoirement qui commence entre l'ordinateur et le joueur
+     **/
     public static void randomPourCommencer(){
         int rand = (int) ((Math.random()) * 2);
         switch (rand){
@@ -58,6 +64,9 @@ public class Duel {
         }
     }
 
+    /**
+     * Demande un code au joueur pour deviner celui de l'ordinateur
+     **/
     public static void choixJoueur() {
         System.out.println("Ecrire un code à 4 chiffres : ");
         totalNum = sc.next();
@@ -65,7 +74,7 @@ public class Duel {
             Menu.menu();
         }
         for (int i = 0; i < 4; i++){
-            if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){
+            if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){ //48 et 57 corresponds à 0 et 9 dans le tableau ASCII.
                 System.out.println("Selectioner une combinaison comprise entre 0000 et 9999" + sautLigne);
                 choixJoueur();
             }
@@ -73,6 +82,9 @@ public class Duel {
         testJoueur();
     }
 
+    /**
+     * Renvoi à Utils pour indiquer l'état des chiffres du code
+     **/
     public static void testJoueur(){
         String conclusion = "";
         if (totalNum.intern() == nbATrouver.intern()){
@@ -90,6 +102,10 @@ public class Duel {
         testOrdi();
     }
 
+    /**
+     * Demande au joueur d'aider l'ordinateur pour trouver son code
+     * Modifie le(s) chiffre(s) du code qui ne sont pas correct
+     **/
     public static void testOrdi(){
         System.out.println("Votre adversaire propose : " + nbOrdi + sautLigne +
                 "écrire un code a 4 chiffre pour aider l'ordinateur : " + sautLigne + "0 - Mauvais" + sautLigne +"1 - Bon");
@@ -98,7 +114,7 @@ public class Duel {
             Menu.menu();
         }
         for (int i = 0; i < 4; i++){
-            if ((int)verif.charAt(i) < 48 || (int)verif.charAt(i) > 49){
+            if ((int)verif.charAt(i) < 48 || (int)verif.charAt(i) > 49){ //48 et 49 corresponds à 0 et 1 dans le tableau ASCII.
                 System.out.println("Selectioner une combinaison comprise entre 0000 et 1111" + sautLigne);
                 testOrdi();
             }
@@ -122,11 +138,17 @@ public class Duel {
         }
     }
 
+    /**
+     * Fin alternative de l'ordinateur
+     **/
     public static void finOrdi(){
         System.out.println("Vous avez perdu l'ordinateur a trouvé votre code secret : " + codePourOrdi);
         finChoix();
     }
 
+    /**
+     * Fin alternative du joueur
+     **/
     public static void fin(){
         System.out.println("Bravo," + sautLigne + "Vous avez trouvé le code secret de l'ordinateur : " + nbATrouver);
         finChoix();

@@ -15,6 +15,10 @@ public class TrouverLeCode {
     static String sautLigne = "\n";
     static String combATrouver = "";
     static String totalNum = "";
+
+    /**
+     * Génère un code à 4 chiffres aléatoire
+     **/
     public static void generationRandom(){
         for (int i = 0; i < 4; i++) {
             combATrouver += (int) ((Math.random()) * 9);
@@ -22,6 +26,9 @@ public class TrouverLeCode {
         jeu();
     }
 
+    /**
+     * Demande au joueur un code pour trouver celui de l'ordinateur
+     **/
     public static void jeu() {
         System.out.println("Ecrire votre code à 4 chiffres : ");
         totalNum = sc.next();
@@ -34,7 +41,7 @@ public class TrouverLeCode {
         if (totalNum.intern() == "stop"){
             Menu.menu();
             return true;
-        }else if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){
+        }else if ((int)totalNum.charAt(i) < 48 || (int)totalNum.charAt(i) > 57){ //48 et 57 corresponds à 0 et 9 dans le tableau ASCII.
             System.out.println("Selectioner une combinaison comprise entre 0000 et 9999" + sautLigne);
             jeu();
         }else {
@@ -43,6 +50,9 @@ public class TrouverLeCode {
         return false;
     }
 
+    /**
+     * Renvoi à Utils pour indiquer l'état des chiffres du code
+     **/
     public static void testCombinaison() {
         String conclusion = "";
         if (totalNum.intern() == combATrouver.intern()){

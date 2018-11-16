@@ -2,7 +2,9 @@ package com.pierre.ocr.modeDeJeu;
 
 import com.pierre.ocr.Gestion.Menu;
 
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class FaireDevinerVotreCode {
@@ -13,12 +15,15 @@ public class FaireDevinerVotreCode {
     static String verif = "";
     static String codePourOrdi = "";
     static int count = 0;
-    static String[] blacklist = {"","","",""};
+    static Map<Integer,String> map = new HashMap<>();
 
+    /**
+     * Saisi du code que l'ordinateur doit trouver
+     **/
     public static void saisi(){
         for (int i = 0; i < 4; i++) {
-            nbOrdi += (int) ((Math.random()) * 9);
-            blacklist[i] += (nbOrdi.charAt(i));
+            nbOrdi += Integer.toString((int)(Math.random() * 9));
+            map.put(i, Character.toString(nbOrdi.charAt(i)));
         }
         System.out.println("Ecrire votre code secret à 4 chiffre pour l'ordinateur");
         codePourOrdi = sc.next();
@@ -33,12 +38,16 @@ public class FaireDevinerVotreCode {
         }
         testOrdi();
     }
-
+    /**
+     * Demande au joueur d'aider l'ordinateur pour trouver son code
+     * Modifie le(s) chiffre(s) du code qui ne sont pas correct
+     * Enregistrement des chiffres incorrect dans une BlackList
+     **/
     public static void testOrdi(){
-        StringBuffer buffer = new StringBuffer(nbOrdi);
         if(nbOrdi.intern() == codePourOrdi.intern()){
             fin();
         }
+        count += 1;
         System.out.println("Votre adversaire propose : " + nbOrdi + sautLigne +
                 "écrire un code a 4 chiffre pour aider l'ordinateur : " + sautLigne + "0 - Mauvais" + sautLigne + "1 - Bon");
         verif = sc.next();
@@ -46,25 +55,33 @@ public class FaireDevinerVotreCode {
             Menu.menu();
         }
         for (int i = 0; i < 4; i++){
-            if ((int)verif.charAt(i) < 48 || (int)verif.charAt(i) > 49){
+            if (verif.charAt(i) < '0' || verif.charAt(i) > '1'){
                 System.out.println("Selectioner une combinaison comprise entre 0000 et 1111" + sautLigne);
                 testOrdi();
             }
         }
 
         for (int i = 0; i < 4; i++){
-            if (verif.charAt(i) == 48){
-                if(blacklist[i].contains(Character.toString(nbOrdi.charAt(i)))){
-                    buffer.setCharAt(i, ((char)((int)Math.random() * 9)));
+            if ((int)verif.charAt(i) == 48){
+                String blacklist = map.get(i);
+                if(blacklist.contains(Character.toString(nbOrdi.charAt(i)))){
+                    int randomint = (int) (Math.random() * 9);
+                    char test = Integer.toString(randomint).charAt(0) ;
+                    StringBuilder builder = new StringBuilder(nbOrdi);
+                    builder.setCharAt(i, test);
+                    nbOrdi = builder.toString();
+
                 }
             }
+            String value = Character.toString(nbOrdi.charAt(i));
+            map.put(i, map.get(i).concat(value));
         }
 
         testOrdi();
     }
 
     public static void fin(){
-        System.out.println("L'ordinateur a trouvé votre code secret en : " + count + "coups." + nbOrdi);
+        System.out.println("L'ordinateur a trouvé votre code secret en : " + count + " coups." + nbOrdi);
         finChoix();
     }
 
