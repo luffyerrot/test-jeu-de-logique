@@ -11,7 +11,8 @@ public class Menu2 {
     public static void menu() {
         String sautLigne = "\n";
         System.out.println("Mastermind : " + sautLigne + sautLigne + "1 - Challenger" + sautLigne +
-                "2 - " + sautLigne + "3 - " + sautLigne + sautLigne + "4 - Revenir au menu du jeu" + sautLigne + "5 - fermer l'application" + sautLigne);
+                "2 - " + sautLigne + "3 - " + sautLigne + sautLigne + "4 - Revenir au menu du jeu" + sautLigne +
+                "5 - fermer l'application" + sautLigne);
         menuChoix();
 
     }

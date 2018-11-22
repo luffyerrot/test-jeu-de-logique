@@ -51,7 +51,8 @@ public class challenger {
                     memoire1 += 0;
                     memoire2 += 9;
                 }
-                System.out.println("Selectioner une combinaison comprise entre " + memoire1 + " et " + memoire2 + sautLigne);
+                System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
+                        " et " + memoire2 + sautLigne);
                 saisi();
             }
         }
@@ -72,14 +73,15 @@ public class challenger {
                     nbConclusion += 1;
                 }
             }
-            System.out.println(nbConclusionCorrect + " Chiffre(s) bien Placé, " + nbConclusion + " Chiffre(s) mal Placé");
+            System.out.println(nbConclusionCorrect + " Chiffre(s) bien Placé, " + nbConclusion +
+                    " Chiffre(s) mal Placé");
             saisi();
         }
     }
 
     public static void fin () {
-        System.out.println("1 - Recommencer" + sautLigne + "2 - Revenir à la séléction du mode de jeu" + sautLigne + "3 - Revenir à la séléction du jeu" + sautLigne +
-                "4 - fermer l'application" + sautLigne);
+        System.out.println("1 - Recommencer" + sautLigne + "2 - Revenir à la séléction du mode de jeu" + sautLigne +
+                "3 - Revenir à la séléction du jeu" + sautLigne + "4 - fermer l'application" + sautLigne);
         finChoix();
     }
 

@@ -26,7 +26,8 @@ public class main {
             indAdminVersion = "désactivé";
         }
         System.out.println("Jeux : " + sautLigne + sautLigne + "1 - Jeu de logique" + sautLigne +
-                "2 - Mastermind" + sautLigne + "3 - fermer l'application" + sautLigne + sautLigne + "4 - Version Admin (" + indAdminVersion + ")" + sautLigne +
+                "2 - Mastermind" + sautLigne + "3 - fermer l'application" + sautLigne + sautLigne +
+                "4 - Version Admin (" + indAdminVersion + ")" + sautLigne +
                 "5 - Taille du code (" + tailleCode + ")" + sautLigne);
         jeuMenuChoix();
     }

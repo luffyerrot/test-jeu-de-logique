@@ -65,7 +65,8 @@ public class duel {
                     memoire1 += 0;
                     memoire2 += 9;
                 }
-                System.out.println("Selectioner une combinaison comprise entre " + memoire1 + " et " + memoire2 + sautLigne);
+                System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
+                        " et " + memoire2 + sautLigne);
                 saisi();
             }
         }
@@ -119,7 +120,8 @@ public class duel {
                     memoire1 += 0;
                     memoire2 += 9;
                 }
-                System.out.println("Selectioner une combinaison comprise entre " + memoire1 + " et " + memoire2 + sautLigne);
+                System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
+                        " et " + memoire2 + sautLigne);
                 choixJoueur();
             }
         }
@@ -153,7 +155,8 @@ public class duel {
      **/
     public static void testOrdi(){
         System.out.println("Votre adversaire propose : " + nbOrdi + sautLigne +
-                "écrire un code à " + tailleCode + " chiffre(s) pour aider l'ordinateur : " + sautLigne + "0 - Mauvais" + sautLigne +"1 - Bon");
+                "écrire un code à " + tailleCode + " chiffre(s) pour aider l'ordinateur : " + sautLigne +
+                "0 - Mauvais" + sautLigne +"1 - Bon");
         try {
             try {
                 verif = sc.next();
@@ -176,7 +179,8 @@ public class duel {
                     memoire1 += 0;
                     memoire2 += 1;
                 }
-                System.out.println("Selectioner une combinaison comprise entre " + memoire1 + " et " + memoire2 + sautLigne);
+                System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
+                        " et " + memoire2 + sautLigne);
                 testOrdi();
             }
         }
@@ -211,13 +215,14 @@ public class duel {
      * Fin alternative du joueur
      **/
     public static void fin(){
-        System.out.println("Bravo," + sautLigne + "Vous avez trouvé le code secret de l'ordinateur : " + nbATrouver + sautLigne);
+        System.out.println("Bravo," + sautLigne + "Vous avez trouvé le code secret de l'ordinateur : " +
+                nbATrouver + sautLigne);
         finChoix();
     }
 
     public static void finChoix(){
-        System.out.println("1 - Recommencer" + sautLigne + "2 - Revenir à la séléction du mode de jeu" + sautLigne + "3 - Revenir à la séléction du jeu" + sautLigne +
-                "4 - fermer l'application" + sautLigne);
+        System.out.println("1 - Recommencer" + sautLigne + "2 - Revenir à la séléction du mode de jeu" + sautLigne +
+                "3 - Revenir à la séléction du jeu" + sautLigne + "4 - fermer l'application" + sautLigne);
         int finChoix;
         try {
             do {

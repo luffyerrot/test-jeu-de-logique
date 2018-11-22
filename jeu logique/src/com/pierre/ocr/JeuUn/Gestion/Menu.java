@@ -13,8 +13,8 @@ public class Menu {
     public static void menu() {
         String sautLigne = "\n";
         System.out.println("Jeu de logique : " + sautLigne + sautLigne + "1 - Challenger" + sautLigne +
-                "2 - Duel" + sautLigne + "3 - Defender" + sautLigne + sautLigne + "4 - Revenir au menu du jeu" + sautLigne +
-                "5 - fermer l'application" + sautLigne);
+                "2 - Duel" + sautLigne + "3 - Defender" + sautLigne + sautLigne +
+                "4 - Revenir au menu du jeu" + sautLigne + "5 - fermer l'application" + sautLigne);
         menuChoix();
 
     }
