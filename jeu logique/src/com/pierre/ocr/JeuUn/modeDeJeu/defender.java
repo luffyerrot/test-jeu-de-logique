@@ -12,7 +12,7 @@ public class defender {
 
     static Scanner sc = new Scanner(System.in);
     static String sautLigne = "\n";
-    static String nbOrdi = "";
+    static String nbOrdi;
     static String verif = "";
     static String codePourOrdi = "";
     static int count = 0;
@@ -20,6 +20,8 @@ public class defender {
     static int tailleCode = main.tailleCode();
 
     public static void generation(){
+        nbOrdi = "";
+        map.clear();
         for (int i = 0; i < tailleCode; i++) {
             nbOrdi += Integer.toString((int)(Math.random() * 9));
             map.put(i, Character.toString(nbOrdi.charAt(i)));
@@ -32,33 +34,32 @@ public class defender {
     public static void saisi(){
         System.out.println("Ecrire votre code secret à " + tailleCode + " chiffre(s) pour l'ordinateur");
         try {
-            try {
-                codePourOrdi = sc.next();
-            }catch (StringIndexOutOfBoundsException e){
-                System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
-                saisi();
+            codePourOrdi = sc.next();
+            if (codePourOrdi.intern() == "stop"){
+                main.jeuMenu();
+            }
+            for (int i = 0; i < tailleCode; i++){
+                if ((int)codePourOrdi.charAt(i) < '0' || (int)codePourOrdi.charAt(i) > '9'){
+                    String memoire1 = "";
+                    String memoire2 = "";
+                    for (int j = 0; j < tailleCode; j++){
+                        memoire1 += 0;
+                        memoire2 += 9;
+                    }
+                    System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
+                            " et " + memoire2 + sautLigne);
+                    saisi();
+                }
             }
         }catch (StringIndexOutOfBoundsException e){
             System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
             saisi();
         }
-        if (codePourOrdi.intern() == "stop"){
-            main.jeuMenu();
+        if (main.admin()){
+            testAdmin();
+        }else {
+            testOrdi();
         }
-        for (int i = 0; i < tailleCode; i++){
-            if ((int)codePourOrdi.charAt(i) < '0' || (int)codePourOrdi.charAt(i) > '9'){
-                String memoire1 = "";
-                String memoire2 = "";
-                for (int j = 0; j < tailleCode; j++){
-                    memoire1 += 0;
-                    memoire2 += 9;
-                }
-                System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
-                        " et " + memoire2 + sautLigne);
-                saisi();
-            }
-        }
-        testOrdi();
     }
     /**
      * Demande au joueur d'aider l'ordinateur pour trouver son code
@@ -74,54 +75,68 @@ public class defender {
                 "écrire un code à " + tailleCode + " chiffre(s) pour aider l'ordinateur : " + sautLigne +
                 "0 - Mauvais" + sautLigne + "1 - Bon");
         try {
-            try {
-                verif = sc.next();
-            }catch (StringIndexOutOfBoundsException e){
-                System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
-                saisi();
+            verif = sc.next();
+            if (verif.intern() == "stop"){
+                main.jeuMenu();
+            }
+            for (int i = 0; i < 4; i++){
+                if (verif.charAt(i) < '0' || verif.charAt(i) > '1'){
+                    String memoire1 = "";
+                    String memoire2 = "";
+                    for (int j = 0; j < tailleCode; j++){
+                        memoire1 += 0;
+                        memoire2 += 1;
+                    }
+                    System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
+                            " et " + memoire2 + sautLigne);
+                    testOrdi();
+                }
+            }
+            for (int i = 0; i < tailleCode; i++){
+                if (verif.charAt(i) == '0'){
+                    String blacklist = map.get(i);
+                    if(blacklist.contains(Character.toString(nbOrdi.charAt(i)))){
+                        int randomint = (int) (Math.random() * 9);
+                        char test = Integer.toString(randomint).charAt(0) ;
+                        StringBuilder builder = new StringBuilder(nbOrdi);
+                        builder.setCharAt(i, test);
+                        nbOrdi = builder.toString();
+                    }
+                }
+                String value = Character.toString(nbOrdi.charAt(i));
+                map.put(i, map.get(i).concat(value));
             }
         }catch (StringIndexOutOfBoundsException e){
             System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
             saisi();
         }
-        if (verif.intern() == "stop"){
-            main.jeuMenu();
-        }
-        for (int i = 0; i < 4; i++){
-            if (verif.charAt(i) < '0' || verif.charAt(i) > '1'){
-                String memoire1 = "";
-                String memoire2 = "";
-                for (int j = 0; j < tailleCode; j++){
-                    memoire1 += 0;
-                    memoire2 += 1;
-                }
-                System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
-                        " et " + memoire2 + sautLigne);
-                testOrdi();
-            }
-        }
+        testOrdi();
+    }
 
+    public static void testAdmin(){
         for (int i = 0; i < tailleCode; i++){
-            if ((int)verif.charAt(i) == 48){
+            if (nbOrdi.intern() == codePourOrdi.intern()){
+                fin();
+            }else if (nbOrdi.charAt(i) != codePourOrdi.charAt(i)){
                 String blacklist = map.get(i);
-                if(blacklist.contains(Character.toString(nbOrdi.charAt(i)))){
+                do {
                     int randomint = (int) (Math.random() * 9);
                     char test = Integer.toString(randomint).charAt(0) ;
                     StringBuilder builder = new StringBuilder(nbOrdi);
                     builder.setCharAt(i, test);
                     nbOrdi = builder.toString();
-
-                }
+                }while(blacklist.contains(Character.toString(nbOrdi.charAt(i))));
             }
             String value = Character.toString(nbOrdi.charAt(i));
             map.put(i, map.get(i).concat(value));
         }
-
-        testOrdi();
+        System.out.println(nbOrdi);
+        count += 1;
+        testAdmin();
     }
 
     public static void fin(){
-        System.out.println("L'ordinateur a trouvé votre code secret en : " + count + " coups." + nbOrdi + sautLigne);
+        System.out.println("L'ordinateur a trouvé votre code secret en : " + count + " coups." + sautLigne);
         finChoix();
     }
 
@@ -134,7 +149,7 @@ public class defender {
                 finChoix = sc.nextInt();
                 switch (finChoix) {
                     case 1:
-                        saisi();
+                        generation();
                         break;
                     case 2:
                         Menu.menu();

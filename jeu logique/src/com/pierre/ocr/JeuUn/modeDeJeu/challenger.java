@@ -17,6 +17,7 @@ public class challenger {
     static String combATrouver;
     static String totalNum = "";
     static int tailleCode = main.tailleCode();
+    static int coupsMax = main.coupsMax();
 
     /**
      * Génère un code à 4 chiffres aléatoire
@@ -36,38 +37,36 @@ public class challenger {
      * Demande au joueur un code pour trouver celui de l'ordinateur
      **/
     public static void jeu() {
+        if (coupsMax == 0){
+            finPerdu();
+        }else{
+            System.out.println("Il vous reste " + coupsMax + " coups");
+        }
         System.out.println("Ecrire votre code à " + tailleCode + " chiffre(s) : ");
         try {
-            try {
-                totalNum = sc.next();
-            }catch (StringIndexOutOfBoundsException e){
-                System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
-                jeu();
+            totalNum = sc.next();
+            if (totalNum.intern() == "stop"){
+                main.jeuMenu();
+            }
+            for (int i = 0; i < tailleCode; i++){
+                if (totalNum.charAt(i) < '0' || totalNum.charAt(i) > '9'){
+                    String memoire1 = "";
+                    String memoire2 = "";
+                    for (int j = 0; j < tailleCode; j++){
+                        memoire1 += 0;
+                        memoire2 += 9;
+                    }
+                    System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
+                            " et " + memoire2 + sautLigne);
+                    jeu();
+                }
             }
         }catch (StringIndexOutOfBoundsException e){
             System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
             jeu();
         }
-
-        if (totalNum.intern() == "stop"){
-            main.jeuMenu();
-        }
-        for (int i = 0; i < tailleCode; i++){
-            if (totalNum.charAt(i) < '0' || totalNum.charAt(i) > '9'){
-                String memoire1 = "";
-                String memoire2 = "";
-                for (int j = 0; j < tailleCode; j++){
-                    memoire1 += 0;
-                    memoire2 += 9;
-                }
-                System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
-                        " et " + memoire2 + sautLigne);
-                jeu();
-            }
-        }
         testCombinaison();
     }
-
 
     /**
      * Renvoi à Utils pour indiquer l'état des chiffres du code
@@ -88,7 +87,13 @@ public class challenger {
             }
         }
         System.out.println(conclusion);
+        coupsMax -= 1;
         jeu();
+    }
+
+    public static void finPerdu(){
+        System.out.println("Vous avez perdu vous n'avez plus de coups, le code était : " + combATrouver + sautLigne);
+        fin();
     }
 
     public static void fin(){

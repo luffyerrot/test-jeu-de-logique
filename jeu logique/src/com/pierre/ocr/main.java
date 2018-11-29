@@ -3,22 +3,34 @@ package com.pierre.ocr;
 import com.pierre.ocr.JeuDeux.Gestion.Menu2;
 import com.pierre.ocr.JeuUn.Gestion.Menu;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.*;
 
 public class main {
 
     static String sautLigne = "\n";
-    static Boolean adminVersion = false;
+    static Boolean adminVersion;
     static String indAdminVersion;
-    static int tailleCode = 4;
+    static int tailleCode;
+    static int coupsMax;
+    static InputStream input;
+    protected static Properties prop = new Properties();
 
     public static void main(String[] args) {
         jeuMenu();
     }
 
-    public static void jeuMenu() {
+    public static void jeuMenu(){
 
+        try {
+            input = new FileInputStream("config.properties");
+            prop.load(input);
+            tailleCode = Integer.valueOf(prop.getProperty("tailleDuCode"));
+            adminVersion = Boolean.valueOf(prop.getProperty("admin"));
+            coupsMax = Integer.valueOf(prop.getProperty("nombreDeCoupsMax"));
+        }catch (Exception e){
+        }
         indAdminVersion = "";
         if (adminVersion){
             indAdminVersion = "activé";
@@ -27,8 +39,7 @@ public class main {
         }
         System.out.println("Jeux : " + sautLigne + sautLigne + "1 - Jeu de logique" + sautLigne +
                 "2 - Mastermind" + sautLigne + "3 - fermer l'application" + sautLigne + sautLigne +
-                "4 - Version Admin (" + indAdminVersion + ")" + sautLigne +
-                "5 - Taille du code (" + tailleCode + ")" + sautLigne);
+                "Version Admin (" + indAdminVersion + ")" + sautLigne + "Taille du code : " + tailleCode + sautLigne);
         jeuMenuChoix();
     }
 
@@ -50,32 +61,13 @@ public class main {
                     case 3:
                         System.exit(0);
                         break;
-                    case 4:
-                        if (adminVersion == false) {
-                            adminVersion = true;
-                        } else if (adminVersion == true) {
-                            adminVersion = false;
-                        }
-                        jeuMenu();
-                        break;
-                    case 5:
-                        System.out.println("Changer la taille du code (min = 1) (max = 50) :");
-                        try {
-                            do {
-                                tailleCode = sc.nextInt();
-                            }while (tailleCode < 1 || tailleCode > 50);
-                        }catch (InputMismatchException e){
-                            System.out.println("ERREUR, entrer un chiffre entre 1 et 50 pour séléctionner une taille !");
-                        }
-                        jeuMenu();
-                        break;
                     default:
-                        System.out.println("Entrer un chiffre entre 1 et 5 :");
+                        System.out.println("Entrer un chiffre entre 1 et 3 :");
                         break;
                 }
-            }while (choix < 1 || choix > 5);
+            }while (choix < 1 || choix > 4);
         }catch (InputMismatchException e){
-            System.out.println("ERREUR, entrer un chiffre entre 1 et 5 pour séléctionner un jeu ou quitter !");
+            System.out.println("ERREUR, entrer un chiffre entre 1 et 3 pour séléctionner un jeu ou quitter !");
             jeuMenuChoix();
         }
     }
@@ -87,4 +79,6 @@ public class main {
     public static int tailleCode(){
         return tailleCode;
     }
+
+    public static int coupsMax(){ return coupsMax; }
 }

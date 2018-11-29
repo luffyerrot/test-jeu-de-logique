@@ -1,14 +1,10 @@
-package com.pierre.ocr.JeuUn.modeDeJeu;
+package com.pierre.ocr.JeuDeux.modeDeJeu;
 
-import com.pierre.ocr.JeuUn.Gestion.Menu;
+import com.pierre.ocr.JeuDeux.Gestion.Menu2;
 import com.pierre.ocr.main;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import static com.pierre.ocr.JeuUn.Gestion.Utils.Correct;
-import static com.pierre.ocr.JeuUn.Gestion.Utils.plusGrand;
-import static com.pierre.ocr.JeuUn.Gestion.Utils.plusPetit;
 
 public class duel {
 
@@ -122,21 +118,24 @@ public class duel {
      * Renvoi à Utils pour indiquer l'état des chiffres du code
      **/
     public static void testJoueur(){
-        String conclusion = "";
+        int nbConclusionCorrect = 0;
+        int nbConclusion = 0;
         if (totalNum.intern() == nbATrouver.intern()){
+            System.out.println("Bravo, tu a gagné :" + sautLigne);
             fin();
-        }else for (int i = 0; i < tailleCode; i++){
-            if (totalNum.charAt(i) > nbATrouver.charAt(i)){
-                conclusion = plusPetit(conclusion, i);
-            } else if (totalNum.charAt(i) < nbATrouver.charAt(i)){
-                conclusion = plusGrand(conclusion, i);
-            }else if (totalNum.charAt(i) == nbATrouver.charAt(i)){
-                conclusion = Correct(conclusion, i);
+        }else {
+            for (int i = 0; i < tailleCode; i++) {
+                if (totalNum.charAt(i) == nbATrouver.charAt(i)) {
+                    nbConclusionCorrect += 1;
+                } else if (nbATrouver.contains(Character.toString(totalNum.charAt(i)))) {
+                    nbConclusion += 1;
+                }
             }
+            System.out.println(nbConclusionCorrect + " Chiffre(s) bien Placé, " + nbConclusion +
+                    " Chiffre(s) mal Placé");
+            testOrdi();
         }
-        System.out.println(conclusion);
-        testOrdi();
-        
+
     }
 
     /**
@@ -217,7 +216,7 @@ public class duel {
                         generation();
                         break;
                     case 2:
-                        Menu.menu();
+                        Menu2.menu();
                         break;
                     case 3:
                         main.jeuMenu();

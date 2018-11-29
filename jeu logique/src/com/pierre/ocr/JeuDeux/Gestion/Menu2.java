@@ -1,6 +1,7 @@
 package com.pierre.ocr.JeuDeux.Gestion;
 
 import com.pierre.ocr.JeuDeux.modeDeJeu.challenger;
+import com.pierre.ocr.JeuDeux.modeDeJeu.duel;
 import com.pierre.ocr.main;
 
 import java.util.InputMismatchException;
@@ -11,7 +12,7 @@ public class Menu2 {
     public static void menu() {
         String sautLigne = "\n";
         System.out.println("Mastermind : " + sautLigne + sautLigne + "1 - Challenger" + sautLigne +
-                "2 - " + sautLigne + "3 - " + sautLigne + sautLigne + "4 - Revenir au menu du jeu" + sautLigne +
+                "2 - Duel" + sautLigne + "3 - " + sautLigne + sautLigne + "4 - Revenir au menu du jeu" + sautLigne +
                 "5 - fermer l'application" + sautLigne);
         menuChoix();
 
@@ -27,7 +28,7 @@ public class Menu2 {
                         challenger.generationRandom();
                         break;
                     case 2:
-                        System.out.println(2);
+                        duel.generation();
                         break;
                     case 3:
                         System.out.println(3);

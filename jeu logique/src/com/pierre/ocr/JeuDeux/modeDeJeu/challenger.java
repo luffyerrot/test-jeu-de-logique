@@ -15,46 +15,47 @@ public class challenger {
     static int nbConclusionCorrect;
     static int nbConclusion;
     static int tailleCode = main.tailleCode();
+    static int coupsMax = main.coupsMax();
 
     public static void generationRandom(){
         nbOrdi = "";
         for (int i = 0; i < tailleCode; i++){
             nbOrdi += Integer.toString((int) (Math.random() * 9));
         }
-        if (main.admin() == true){
+        if (main.admin()){
             System.out.println(nbOrdi);
         }
         saisi();
     }
 
     public static void saisi(){
+        if (coupsMax == 0){
+            finPerdu();
+        }else{
+            System.out.println("Il vous reste " + coupsMax + " coups");
+        }
         System.out.println("Ecrire le code à " + tailleCode + " Chiffre(s) : ");
-            try {
-                try {
-                    nbJoueur = sc.next();
-                }catch (StringIndexOutOfBoundsException e){
-                    System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
+        try {
+            nbJoueur = sc.next();
+            if (nbJoueur.intern() == "stop"){
+                main.jeuMenu();
+            }
+            for (int i = 0; i < tailleCode; i++){
+                if (nbJoueur.charAt(i) < '0' || nbJoueur.charAt(i) > '9'){
+                    String memoire1 = "";
+                    String memoire2 = "";
+                    for (int j = 0; j < tailleCode; j++){
+                        memoire1 += 0;
+                        memoire2 += 9;
+                    }
+                    System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
+                            " et " + memoire2 + sautLigne);
                     saisi();
                 }
-            }catch (StringIndexOutOfBoundsException e){
-                System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
-                saisi();
             }
-        if (nbJoueur.intern() == "stop"){
-            main.jeuMenu();
-        }
-        for (int i = 0; i < tailleCode; i++){
-            if (nbJoueur.charAt(i) < '0' || nbJoueur.charAt(i) > '9'){
-                String memoire1 = "";
-                String memoire2 = "";
-                for (int j = 0; j < tailleCode; j++){
-                    memoire1 += 0;
-                    memoire2 += 9;
-                }
-                System.out.println("Selectioner une combinaison comprise entre " + memoire1 +
-                        " et " + memoire2 + sautLigne);
-                saisi();
-            }
+        }catch (StringIndexOutOfBoundsException e){
+            System.out.println("Attention, entrer un code à " + tailleCode + " chiffre(s)");
+            saisi();
         }
         testJoueur();
     }
@@ -75,8 +76,14 @@ public class challenger {
             }
             System.out.println(nbConclusionCorrect + " Chiffre(s) bien Placé, " + nbConclusion +
                     " Chiffre(s) mal Placé");
+            coupsMax -= 1;
             saisi();
         }
+    }
+
+    public static void finPerdu(){
+        System.out.println("Vous avez perdu vous n'avez plus de coups, le code était : " + nbOrdi + sautLigne);
+        fin();
     }
 
     public static void fin () {
