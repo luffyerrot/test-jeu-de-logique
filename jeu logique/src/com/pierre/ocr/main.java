@@ -2,6 +2,8 @@ package com.pierre.ocr;
 
 import com.pierre.ocr.JeuDeux.Gestion.Menu2;
 import com.pierre.ocr.JeuUn.Gestion.Menu;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -16,8 +18,11 @@ public class main {
     static int coupsMax;
     static InputStream input;
     protected static Properties prop = new Properties();
+    private static Logger logger = Logger.getLogger(main.class);
 
     public static void main(String[] args) {
+        DOMConfigurator.configure("log4j.xml");
+        logger.info("Entrer dans le jeu");
         jeuMenu();
     }
 
