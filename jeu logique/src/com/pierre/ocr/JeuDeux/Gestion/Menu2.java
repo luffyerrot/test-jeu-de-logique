@@ -12,8 +12,8 @@ public class Menu2 {
     public static void menu() {
         String sautLigne = "\n";
         System.out.println("Mastermind : " + sautLigne + sautLigne + "1 - Challenger" + sautLigne +
-                "2 - Duel" + sautLigne + "3 - " + sautLigne + sautLigne + "4 - Revenir au menu du jeu" + sautLigne +
-                "5 - fermer l'application" + sautLigne);
+                "2 - Duel" + sautLigne + sautLigne + "3 - Revenir au menu du jeu" + sautLigne +
+                "4 - fermer l'application" + sautLigne);
         menuChoix();
 
     }
@@ -31,12 +31,9 @@ public class Menu2 {
                         duel.generation();
                         break;
                     case 3:
-                        System.out.println(3);
-                        break;
-                    case 4:
                         main.jeuMenu();
                         break;
-                    case 5 :
+                    case 4 :
                         System.exit(0);
                         break;
                     default :

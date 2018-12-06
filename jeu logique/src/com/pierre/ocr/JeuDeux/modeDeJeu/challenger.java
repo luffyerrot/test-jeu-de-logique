@@ -17,6 +17,9 @@ public class challenger {
     static int tailleCode = main.tailleCode();
     static int coupsMax = main.coupsMax();
 
+    /**
+     * Génère un code aléatoire
+     **/
     public static void generationRandom(){
         nbOrdi = "";
         for (int i = 0; i < tailleCode; i++){
@@ -28,6 +31,9 @@ public class challenger {
         saisi();
     }
 
+    /**
+     * Demande au joueur un code pour trouver celui de l'ordinateur
+     **/
     public static void saisi(){
         if (coupsMax == 0){
             finPerdu();
@@ -60,6 +66,9 @@ public class challenger {
         testJoueur();
     }
 
+    /**
+     * Renvoi le statut du code
+     */
     public static void testJoueur(){
         nbConclusionCorrect = 0;
         nbConclusion = 0;

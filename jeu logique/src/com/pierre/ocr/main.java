@@ -77,6 +77,7 @@ public class main {
         }
     }
 
+    //Permet aux differentes class de récupérer les valeurs du fichier config
     public static Boolean admin(){
         return adminVersion;
     }

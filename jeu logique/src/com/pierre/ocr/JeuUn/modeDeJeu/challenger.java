@@ -20,7 +20,7 @@ public class challenger {
     static int coupsMax = main.coupsMax();
 
     /**
-     * Génère un code à 4 chiffres aléatoire
+     * Génère un code aléatoire
      **/
     public static void generationRandom(){
         combATrouver = "";
