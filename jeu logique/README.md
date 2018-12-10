@@ -1,4 +1,9 @@
-Compiler le programme :
+Mettez votre logique à l'épreuve :
+- Prérequis :
+. Java 1.8
+. Intellij Idea
+
+Compiler le programme (avec intellij):
 1 - File / Projet Structure
 2 - Artifacts
 3 - Séléctionner le + ensuite JAR / (from modules with dependencies)
