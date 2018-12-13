@@ -15,13 +15,14 @@ public class defender {
     static String nbOrdi;
     static String verif = "";
     static String codePourOrdi = "";
-    static int count = 0;
+    static int count;
     static Map<Integer,String> map = new HashMap<>();
     static int tailleCode = main.tailleCode();
 
     public static void generation(){
         nbOrdi = "";
         map.clear();
+        count = 0;
         for (int i = 0; i < tailleCode; i++) {
             nbOrdi += Integer.toString((int)(Math.random() * 9));
             map.put(i, Character.toString(nbOrdi.charAt(i)));

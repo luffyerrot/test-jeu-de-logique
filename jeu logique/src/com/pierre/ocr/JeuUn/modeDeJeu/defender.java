@@ -22,6 +22,7 @@ public class defender {
     public static void generation(){
         nbOrdi = "";
         map.clear();
+        count = 0;
         for (int i = 0; i < tailleCode; i++) {
             nbOrdi += Integer.toString((int)(Math.random() * 9));
             map.put(i, Character.toString(nbOrdi.charAt(i)));
